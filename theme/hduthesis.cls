@@ -377,28 +377,29 @@
 \newcommand\makeblindpage{
 	\cleardoublepage
 	\pdfbookmark[0]{封面}{anchor_blind}
-	\thispagestyle{HDU@empty}{
-		\newgeometry{top=2.5cm, bottom=2.5cm, left=2.7cm, right=2.7cm}
-%		\linespread{1.3}
-		%\vspace*{8mm}
-		%	\vspace*{-2mm}
-		\begin{flushleft}
+	\thispagestyle{HDU@empty}
+	\newgeometry{top=3.2cm, bottom=2.5cm, left=2.7cm, right=2.7cm}
+
+	\linespread{1.3}
+%	\vspace*{1mm}
+	
+	\begin{flushleft}
 		{
 			\zihao{5}\songti\bfseries
 			\setlength{\baselineskip}{49pt}
 			\noindent\ding{72}全日制专业学位研究生\par
 		}
-		\end{flushleft}
+	\end{flushleft}
+	
+	\vspace{23mm}
 
-		\vspace*{28mm}
-
-		\begin{center}
-			{\fontsize{30pt}{49pt}\selectfont\songti\bfseries
+	\begin{center}
+		{\fontsize{30pt}{49pt}\selectfont\songti\bfseries
 				浙\hspace{0.5em}江\hspace{0.5em}省\hspace{0.5em}硕\hspace{0.5em}士\hspace{0.5em}学\hspace{0.5em}位\hspace{0.5em}论\hspace{0.5em}文}
-		\end{center}
-		\vspace{40mm}
-		
-		{
+	\end{center}
+	\vspace{33.5mm}
+
+{
 			\zihao{-2}\songti
 			\setlength{\parindent}{1.01cm}
 			\setlength{\baselineskip}{41pt}
@@ -407,13 +408,14 @@
 			\indent 专业学位类别（领域）：\HDU@major\par
 			\indent \mbox{}\par
 			\indent 研究方向：\HDU@research\par
-		}
-		
-		\vspace{35mm}
-		\restoregeometry
-		
-	}
+}
+%	\vspace{40mm}
 
+%	\begin{center}
+%		{\zihao{4}\kaishu{\HDU@defencedate}}
+%	\end{center}
+	\restoregeometry
+		
 }
 
 
