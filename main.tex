@@ -1,4 +1,4 @@
-\documentclass[oneside, nocpsupervisor, blind]{theme/hduthesis} % 如果你的论文不满80页，还是单面印刷吧
+\documentclass[oneside, nocpsupervisor, noblind]{theme/hduthesis} % 如果你的论文不满80页，还是单面印刷吧
 
 \newcommand{\mycite}[1]{\scalebox{1.3}[1.3]{\raisebox{-0.65ex}{\cite{#1}}}}
 
@@ -36,8 +36,9 @@
 \submitdate{2025年3月}   % 论文提交日期 栏
 
 % 答辩日期
-\defencedate{2025年3月}
-\eendefencedate{March, 2025}  % 因为endefencedate 命名被占用
+\defenceyear{2025}
+\defencemonth{6}
+\defenceday{20}
 
 % 论文前置部分变量填写完毕 开始全书排版
 \begin{document}
@@ -63,7 +64,7 @@
 % 正文排版开始 建议一章一编辑 （好像无法嵌套 include） 
 \mainmatter
 \include{contents/chapter1.tex}
-\include{contents/chapter2.tex} 
+\include{contents/chapter2.tex}
 \include{contents/chapter3.tex}
 \include{contents/chapter4.tex}
 \include{contents/chapter5.tex}
@@ -88,9 +89,9 @@
 % 作者简历
 \makeatletter
 \if@blind
-	\include{blind_review/blind_review_self.tex}
+    \include{blind_review/blind_review_self.tex}
 \else
-	\include{contents/c-self}
+    \include{contents/c-self}
 \fi
 \makeatother
 \end{document}
