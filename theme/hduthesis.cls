@@ -168,10 +168,31 @@
 
 
 % 中文题名页
-\newcommand*\defencedate[1]{\gdef\HDU@defencedate{#1}}				% 答辩日期
+\newcommand*\defenceyear[1]{\gdef\HDU@defenceyear{#1}}				% 答辩年份
+\newcommand*\defencemonth[1]{\gdef\HDU@defencemonth{#1}}				% 答辩月份
+\newcommand*\defenceday[1]{\gdef\HDU@defenceday{#1}}				% 答辩天
 
-% 英文题名页
-\newcommand*\eendefencedate[1]{\gdef\HDU@eendefencedate{#1}}		% 答辩日期英文版
+
+\gdef\HDU@englishdefencemonth{%
+  \ifcase\HDU@defencemonth
+    % 若月份为0则不输出任何内容
+  \or January%
+  \or February%
+  \or March%
+  \or April%
+  \or May%
+  \or June%
+  \or July%
+  \or August%
+  \or September%
+  \or October%
+  \or November%
+  \or December%
+  \else
+    \textbf{Invalid month number}%
+  \fi
+  }
+
 
 
 % 正文部分文字的行距设置
@@ -412,7 +433,6 @@
 %	\vspace{40mm}
 
 %	\begin{center}
-%		{\zihao{4}\kaishu{\HDU@defencedate}}
 %	\end{center}
 	\restoregeometry
 		
@@ -448,7 +468,8 @@
 	\vspace{40mm}
 
 	\begin{center}
-		{\zihao{4}\kaishu{\HDU@defencedate}}
+		{\zihao{4}\kaishu{\HDU@defenceyear 年 \HDU@defencemonth 月}}
+
 	\end{center}
 
 }
@@ -483,7 +504,8 @@
 	\vspace{35mm}
 
 	\begin{center}
-		{\zihao{4}\bfseries{\HDU@eendefencedate}}
+		{\zihao{4}\bfseries{\HDU@englishdefencemonth, \HDU@defenceyear}}
+
 	\end{center}
 }
 
@@ -495,7 +517,8 @@
 	\pdfbookmark[0]{原创性声明}{anchor_os}
 	\thispagestyle{HDU@empty}
 	{
-		\newcommand\signature@date{日期：\hspace{8ex}年\hspace{4ex}月\hspace{4ex}日}
+		\newcommand\signature@date{日期：\hspace{2ex}\HDU@defenceyear\hspace{2ex}年 \hspace{1ex}\HDU@defencemonth\hspace{1ex}月\hspace{1ex}\HDU@defenceday\hspace{1ex}日}
+%		\newcommand\signature@date{日期：\hspace{8ex}年\hspace{4ex}月\hspace{4ex}日}
 
 		\linespread{1.7}			% 相当于word中的1.5倍行距。
 		\songti\zihao{-4}\vspace{-2ex} % 1 ex = 当前字体尺寸中 x 的高度
