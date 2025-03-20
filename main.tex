@@ -1,4 +1,9 @@
-\documentclass[oneside, nocpsupervisor, noblind]{theme/hduthesis} % 如果你的论文不满80页，还是单面印刷吧
+\documentclass[
+				oneside, 
+				nocpsupervisor, 
+				noblind, 
+				academic % 去掉academic则表示专硕，加上则是学硕，控制封面元素
+				]{theme/hduthesis} % 如果你的论文不满80页，还是单面印刷吧
 
 \newcommand{\mycite}[1]{\scalebox{1.3}[1.3]{\raisebox{-0.65ex}{\cite{#1}}}}
 
@@ -16,9 +21,9 @@
 \englishauthor{xxxxxx}
 
 \classification{TP311.1}    % 封面头使用
-\serialnumber{10335}        % 封面头使用
-\secretlevel{无}            % 封面头使用
-\studentnumber{123456}    % 封面头使用
+\serialnumber{10336}        % 封面头使用
+\secretlevel{}            % 封面头使用
+\studentnumber{123456789}    % 封面头使用
 
 \supervisor{xxxx}
 \englishsupervisor{xxxxx}
@@ -30,6 +35,7 @@
 
 % 从机械工程学院改来，保留设定变量命名
 \major{xxxx}
+\degree{工学}
 \research{xxxxx}
 \institute{xxxxxx}    % 所在学位栏 填 软件学院
 

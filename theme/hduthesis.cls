@@ -15,6 +15,11 @@
 \newif\if@blind
 \DeclareOption{blind}{\@blindtrue}
 \DeclareOption{noblind}{\@blindfalse}
+% 新增条件变量，区分学硕和专硕（学硕为 true，专硕为 false）
+\newif\if@acad
+\DeclareOption{academic}{\@acadtrue}     % 学硕
+\DeclareOption{professional}{\@acadfalse}  % 专硕
+
 \ProcessOptions\relax
 
 
@@ -165,6 +170,7 @@
 \newcommand*\research[1]{\gdef\HDU@research{#1}}					% 研究方向
 \newcommand*\institute[1]{\gdef\HDU@institute{#1}}					% 所在学院
 \newcommand*\submitdate[1]{\gdef\HDU@submitdate{#1}}				% 提交日期
+\newcommand*\degree[1]{\gdef\HDU@degree{#1}}				% 专业学位类别
 
 
 % 中文题名页
@@ -355,44 +361,73 @@
 	\cleardoublepage
 	\pdfbookmark[0]{封面}{anchor_cover}
 	\thispagestyle{HDU@empty}
+	\newgeometry{top=2.7cm, bottom=2.5cm, left=2.7cm, right=2.7cm}
+	
+{	\renewcommand{\arraystretch}{0.05}
+	\begin{tabular}{>{\zihao{-4}\songti}l>{\zihao{-4}\songti}l>{\zihao{-4}\songti}l>{\zihao{-4}\songti}l>{\zihao{-4}\songti}l}
+  学号：  & \HDUunderline[86pt]{\zihao{-4}\songti{\HDU@studentnumber}\hspace{1em}} & \makebox[49mm]{}
+ & 学校代码：  & \HDUunderline[60pt]{\zihao{-4}\songti{\HDU@serialnumber}\hspace{1em}} \\[3mm]
+  密级：  & \HDUunderline[86pt]{\kaishu{\HDU@secretlevel}\hspace{1em}} &  &  & \\[3mm]
+\end{tabular}
+}
 
+\vspace{3mm}
 	\begin{center}
-		\includegraphics[width=160mm]{theme/logo/HDUlogo.pdf}\par
-		\vspace{10mm}
+		\hspace{-1.2mm}\includegraphics[width=124.1638mm]{theme/logo/HDUlogo.png}\par
+		\vspace{9.47mm}
 		{
-			{\zihao{2}\songti\bfseries 硕\hspace{1em}士\hspace{1em}学\hspace{1em}位\hspace{1em}论\hspace{1em}文}
+			{\zihao{1}\heiti 硕\hspace{0.5em}士\hspace{0.5em}学\hspace{0.5em}位\hspace{0.5em}论\hspace{0.5em}文}
 		}\par
-		% \vspace{10mm}
-		% {
-		%     {\zihao{2}\songti\bfseries 详细摘要}
-		% }\par
-		\vspace{36mm}
+		\vspace{6mm}
+		{
+		\if@acad
+  			% 学硕的处理
+  			{\zihao{-1}\songti （学术学位）}
+		\else
+  			% 专硕的处理
+  			{\zihao{-1}\songti （专业学位）}
+		\fi
+		}\par
+		\vspace{3mm}
+		\includegraphics[width=29mm]{theme/logo/logo.png}\par
 	\end{center}
-	\vspace{6mm}
+	\vspace{5.8mm}
 	% 新建一个长度寄存器，存放封面标题下划线宽度值
 	\newlength{\titleulwidth@cover}
 	\addtolength{\titleulwidth@cover}{260pt}
 	\begin{center}
-		\begin{tabular}[t]{>{\zihao{-2}\songti\bfseries}rl}
-			题\,\,\,目: &
+		\begin{tabular}[t]{>{\zihao{3}\songti\bfseries}rc}
+			论文题目: &
 			{\begin{minipage}[t][60pt][t]{\titleulwidth@cover}
-						 \zihao{-2} \kaishu
+						 \zihao{3} \songti\bfseries
+						 \centering
 						 \uline{\HDU@title\hfill}
 					 \end{minipage}
 				}
 		\end{tabular}
 
-		\vskip 9mm
-		\begin{tabular}{>{\zihao{3}\songti\bfseries}l>{\zihao{3}\fangsong}l}
-			研\,\,\,究\,\,\,生            & \HDUunderline[200pt]{ \kaishu{\HDU@author} \hspace{1em}}                           \\[3mm]
-			专\,\,\,\,\,\,\,\,\,\,\,\,业 & \HDUunderline[200pt]{\kaishu{\HDU@major} \hspace{1em}}                             \\[3mm]
-			指导教师                       & \HDUunderline[200pt]{\kaishu{\HDU@supervisor} \hspace{1em} \kaishu{\HDU@spvtitle}} \\[3mm]
+		\vskip 10.5mm
+		\begin{tabular}{>{\zihao{4}\songti}l>{\zihao{4}\songti}l}
+			作\,\,\,者\,\,\,姓\,\,\,名\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@author} \hspace{1em}}\\[4.4mm]
+			指\,\,\,导\,\,\,教\,\,\,师\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@supervisor} \hspace{1em} \songti{\HDU@spvtitle}}\\[4.4mm]
+%			第\,\,\,二\,\,\,教\,\,\,师\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@spvtitle} \hspace{1em}}\\[3mm] 如果你有多个导师，在这里加
+%			第\,\,\,三\,\,\,教\,\,\,师\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@spvtitle} \hspace{1em}}\\[3mm]
+			\if@acad
+  				% 学硕的处理
+  				专\,\,\,业\,\,\,名\,\,\,称\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@major} \hspace{1em}}\\[4.4mm]
+			\else
+  				% 专硕的处理
+  				专业学位类别：            			 \HDUunderline[166pt]{ \songti{\HDU@degree} \hspace{1em}}\\[4.4mm]
+			专\,\,\,业\,\,\,领\,\,\,领\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@major} \hspace{1em}}\\[4.4mm]
+			\fi
+
+			
+			所\,\,\,在\,\,\,学\,\,\,院\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@institute} \hspace{1em}}\\[4.4mm]
+			完\,\,\,成\,\,\,时\,\,\,间\,\,\,： \HDUunderline[166pt]{ \songti{\HDU@submitdate} \hspace{1em}}\\[4.4mm]
 		\end{tabular}
 	\end{center}
 	\vskip 20mm
-	\begin{center}
-		{\zihao{4}\songti\bfseries 完成日期 \hspace{1em} \HDUunderline[150pt]{\mdseries\kaishu{\HDU@submitdate}}}
-	\end{center}
+	\restoregeometry
 }
 
 \newcommand\makeblindpage{
