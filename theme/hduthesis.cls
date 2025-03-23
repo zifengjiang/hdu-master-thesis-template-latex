@@ -443,7 +443,12 @@
 		{
 			\zihao{5}\songti\bfseries
 			\setlength{\baselineskip}{49pt}
+			\if@acad
+			\noindent\ding{72}全日制学术学位研究生\par
+			\else
 			\noindent\ding{72}全日制专业学位研究生\par
+			\fi
+			
 		}
 	\end{flushleft}
 	
@@ -461,7 +466,11 @@
 			\setlength{\baselineskip}{41pt}
 			\indent 论文题目：\HDU@title \par
 			\indent \mbox{}\par
+			\if@acad
+			\indent 专业名称：\HDU@major\par
+			\else
 			\indent 专业学位类别（领域）：\HDU@major\par
+			\fi
 			\indent \mbox{}\par
 			\indent 研究方向：\HDU@research\par
 }
