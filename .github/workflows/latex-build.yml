@@ -45,6 +45,8 @@ jobs:
       - name: Compile with XeLaTeX (twice)
         run: |
           $LATEX_CMD -interaction=nonstopmode main.tex
+          bibtex main
+          $LATEX_CMD -interaction=nonstopmode main.tex
           $LATEX_CMD -interaction=nonstopmode main.tex
 
       - name: Rename PDF with timestamp
