@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LATEX_CMD: xelatex
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -20,7 +21,7 @@ jobs:
       - name: Set up timestamp
         id: set_timestamp
         run: |
-          echo "ts=$(date -u +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+          echo "TIMESTAMP=$(date -u +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
       - name: Install TeX Live and Chinese & algorithm2e support
         run: |
@@ -55,5 +56,4 @@ jobs:
         with:
           tag_name: build-${{ env.TIMESTAMP }}
           files: main_${{ env.TIMESTAMP }}.pdf
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
