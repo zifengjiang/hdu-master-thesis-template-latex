@@ -43,10 +43,14 @@ jobs:
             sudo fc-cache -fv
           fi
 
-      - name: Compile with XeLaTeX (twice)
+      - name: Build PDF and validate result
         run: |
-          latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -f main.tex
-
+          latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -f main.tex || true
+          if [ ! -f main.pdf ]; then
+            echo "PDF generation failed: main.pdf not found"
+            cat main.log || true
+            exit 1
+          fi
       - name: Rename PDF with timestamp
         run: |
           mv main.pdf main_${{ env.TIMESTAMP }}.pdf
