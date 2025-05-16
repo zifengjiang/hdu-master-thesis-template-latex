@@ -50,11 +50,10 @@ jobs:
         run: |
           mv main.pdf main_${{ steps.set_timestamp.outputs.ts }}.pdf
 
-      - name: Create Release and Upload PDF
-        uses: softprops/action-gh-release@v1
+      - name: Upload PDF to GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: build-${{ steps.set_timestamp.outputs.ts }}
-          name: XeLaTeX build ${{ steps.set_timestamp.outputs.ts }}
-          files: main_${{ steps.set_timestamp.outputs.ts }}.pdf
+          tag_name: build-${{ env.TIMESTAMP }}
+          files: main_${{ env.TIMESTAMP }}.pdf
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
