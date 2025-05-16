@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LATEX_CMD: xelatex
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
     steps:
       - name: Checkout repository
@@ -56,4 +56,4 @@ jobs:
         with:
           tag_name: build-${{ env.TIMESTAMP }}
           files: main_${{ env.TIMESTAMP }}.pdf
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
