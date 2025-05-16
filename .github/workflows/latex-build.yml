@@ -49,7 +49,7 @@ jobs:
 
       - name: Rename PDF with timestamp
         run: |
-          mv main.pdf main_${{ steps.set_timestamp.outputs.ts }}.pdf
+          mv main.pdf main_${{ env.TIMESTAMP }}.pdf
 
       - name: Upload PDF to GitHub Release
         uses: softprops/action-gh-release@v2
