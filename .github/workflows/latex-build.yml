@@ -1,0 +1,59 @@
+name: XeLaTeX Build & Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    env:
+      LATEX_CMD: xelatex
+      GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up timestamp
+        id: set_timestamp
+        run: |
+          echo "TIMESTAMP=$(date -u +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+      - name: Install TeX Live and Chinese & algorithm2e support
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            latexmk \
+            texlive-xetex \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            fonts-noto-cjk \
+            texlive-lang-chinese \
+            texlive-science
+
+      - name: Install custom fonts
+        run: |
+          if [ -d fonts ]; then
+            sudo cp fonts/* /usr/local/share/fonts/
+            sudo fc-cache -fv
+          fi
+
+      - name: Compile with XeLaTeX (twice)
+        run: |
+          latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error -f main.tex
+
+      - name: Rename PDF with timestamp
+        run: |
+          mv main.pdf main_${{ env.TIMESTAMP }}.pdf
+
+      - name: Upload PDF to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ env.TIMESTAMP }}
+          files: main_${{ env.TIMESTAMP }}.pdf
+          token: ${{ secrets.GH_PAT }}
