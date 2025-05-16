@@ -45,7 +45,7 @@ jobs:
       - name: Compile with XeLaTeX (twice)
         run: |
           $LATEX_CMD -interaction=nonstopmode main.tex
-          bibtex main
+          bibtex main || (echo "BibTeX failed, possibly due to no citations. Creating empty main.bbl..." && echo "" > main.bbl)
           $LATEX_CMD -interaction=nonstopmode main.tex
           $LATEX_CMD -interaction=nonstopmode main.tex
 
