@@ -44,10 +44,7 @@ jobs:
 
       - name: Compile with XeLaTeX (twice)
         run: |
-          $LATEX_CMD -interaction=nonstopmode main.tex
-          bibtex main || (echo "BibTeX failed, possibly due to no citations. Creating empty main.bbl..." && echo "" > main.bbl)
-          $LATEX_CMD -interaction=nonstopmode main.tex
-          $LATEX_CMD -interaction=nonstopmode main.tex
+          latexmk -xelatex -bibtex -interaction=nonstopmode -halt-on-error main.tex
 
       - name: Rename PDF with timestamp
         run: |
