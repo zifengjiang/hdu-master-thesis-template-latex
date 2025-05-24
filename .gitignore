@@ -27,4 +27,4 @@
 *.swo
 .texpadtmp/
 .DS_Store
-
+/*.pdf
