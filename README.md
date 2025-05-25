@@ -21,6 +21,7 @@
 
   ```
 - 编译过程中可能需要运行多次 XeLaTeX 命令以正确生成目录、参考文献等。
+- 也可以选择使用GitHub Actions来进行编译，编译完成后会将pdf进行release，使用Actions时需要你为当前仓库添加一个 `名为GH_PAT`的Repository secrets，具体如何添加，作为一个研究生，你应该可以自己解决，去问GPT或者其他大语言模型吧。注意哈，私有仓库也是可以使用GitHub Actions的。
 
 ## 模版参数
 
